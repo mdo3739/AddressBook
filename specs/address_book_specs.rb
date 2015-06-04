@@ -85,5 +85,26 @@ RSpec.describe AddressBook do
     it "checks the details of the fifth entry" do
       book.import_from_csv("entries.csv")
     end
+
+    it "also imports the correct number of entries" do
+      expect(book.entries.size).to eql 0
+      book.import_from_csv('entries_2.csv')
+      expect(book.entries.size).to eql 3
+    end
+
+    it "checks the details of the first entry" do
+      book.import_from_csv("entries_2.csv")
+      check_entry(book.entries[0], "Jordan", "555-555-5555", "jordan@example.com")
+    end
+
+    it "checks the details of the second entry" do
+      book.import_from_csv("entries_2.csv")
+      check_entry(book.entries[1], "Blake", "555-555-5555", "blake@example.com")
+    end
+
+    it "checks the details of the third entry" do
+      book.import_from_csv("entries_2.csv")
+      check_entry(book.entries[2], "Josh", "555-555-5555", "josh@example.com")
+    end
   end
 end
