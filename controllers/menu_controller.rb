@@ -15,6 +15,7 @@ class MenuController
     puts "4 - Search for an entry"
     puts "5 - Import entries from a CSV"
     puts "6 - Exit"
+    puts "7 - Obliterate all entries"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -43,6 +44,10 @@ class MenuController
     when 6
       puts "Good-bye!"
       exit(0)
+    when 7
+      system "clear"
+      obliterate
+      main_menu
     else
       system "clear"
       puts "Sorry, Tha is not a valid option"
@@ -196,5 +201,15 @@ class MenuController
     system "clear"
     puts "Updated entry: "
     puts entry
+  end
+
+  def obliterate
+    print "Are you sure you want to delete everything? "
+    answer = gets.chomp
+    if answer == "yes"
+      @address_book.entries.size.times do
+        delete_entry(@address_book.entries[0])
+      end
+    end
   end
 end
